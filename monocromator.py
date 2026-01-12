@@ -6,6 +6,7 @@ import os
 import numpy as np
 from scipy.interpolate import CubicSpline
 import time
+from pathlib import Path
 
 class Monocromator:
 
@@ -242,7 +243,12 @@ class Monocromator:
     
    
 
-    def set_wavelength(self, wavelength, calib_file=r"C:\Users\jeans\Desktop\Studie\Stage\MSP\wavelength_calib_Grating_300_500.txt"):
+    def set_wavelength(self, wavelength, calib_file=None):
+        if calib_file is None:
+            calib_file = Path(__file__).resolve().parent / "wavelength_calib_Grating_300_500.txt"
+
+        with open(calib_file, "r") as f:
+            data = f.read()
         """
         Zet de golflengte door de motor naar de juiste positie te bewegen.
         
@@ -302,5 +308,6 @@ def list_monocromators():
             monocromator.close()
         except:
             pass
+
 
     return monocromators
