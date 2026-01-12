@@ -1,0 +1,82 @@
+[motor_prms]
+drive = "2401"
+stage = "TM_stage"
+drive_setup = "MonoF_B2.t.zip"
+port = "COM24"
+homing = "RESET"
+step = 20.000000    
+speed = 380.000000    
+acceleration = 8.000000    
+timeout = 60000    
+deadtime = 200    
+pos_var = "APOS"
+backlash = 0    
+
+[other_prms]
+slow_loop_timeout = 200    
+spreadsheet_precision = 1    
+preset_wavelengths = "400.0,500.0,800.0,1000.0,1300.0"
+device_name = "Monochromator-F"
+filterswitch = "F1:355:F2:655:F3:1050:F4:9999:F5:475"
+grating_mount = "SG, B"
+grating_default = "0"
+servo_offsets = "0,0,0,0,0,0"
+lamp_switch = FALSE    
+
+[device_functions]
+Shutter = "B, 300, Open:OPEN, Close:CLOSE"
+Filters = "B, 300, no_filter:GOTO_POS_1, LP_345nm:GOTO_POS_2, LP_645nm:GOTO_POS_3, LP_1000nm:GOTO_POS_4, LP_475nm:GOTO_POS_5"
+Lamp = "B, 100, Lamp_OFF:OFF, Lamp_ON:ON"
+FilterTuning = "B, 100, no_filter:SET_POS_1:261, LP_345nm:SET_POS_2:230, LP_645nm:SET_POS_3:195, LP_1000nm:SET_POS_4:160, LP_475nm:SET_POS_5:126"
+ShutterTuning = "B, 100, Open:OPEN_POS_SET:183, Close:CLOSE_POS_SET:220"
+
+[HSS]
+type = ""
+enabled = FALSE    
+mode = FALSE    
+polarity = FALSE    
+open_time = 0    
+offset = 0    
+default_open = FALSE    
+
+[Grating_00]
+label = "Grating_Master"
+enabled = TRUE    
+lines = 600    
+blaze = 500.000000    
+min_wavelength = 200.000000    
+max_wavelength = 2500.000000    
+switch_wavelength = 9999.000000    
+default_wavelength = 532.000000    
+increment = 0.100000    
+interpolation = "linear"
+tolerance = 0.200000    
+zero_order_pos = 202085    
+
+[Grating_01]
+label = "Grating_1200_500_(0043)"
+enabled = TRUE    
+lines = 1200    
+blaze = 500.000000    
+min_wavelength = 400.000000    
+max_wavelength = 2000.000000    
+switch_wavelength = 9999.000000    
+default_wavelength = 700.000000    
+increment = 0.100000    
+interpolation = "linear"
+tolerance = 0.200000    
+zero_order_pos = 202159    
+
+[Grating_02]
+label = "Grating_600_500_(0044)"
+enabled = TRUE    
+lines = 600    
+blaze = 500.000000    
+min_wavelength = 200.000000    
+max_wavelength = 2500.000000    
+switch_wavelength = 9999.000000    
+default_wavelength = 532.000000    
+increment = 0.100000    
+interpolation = "linear"
+tolerance = 0.200000    
+zero_order_pos = 200748    
