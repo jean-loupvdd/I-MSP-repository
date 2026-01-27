@@ -193,7 +193,7 @@ class MSP_GUI:
         self.cam_live = CameraLive()  # live camera aan
 
         # Start de automatische camera-reconnect loop
-        self.root.after(5000, self._attempt_camera_reconnect)
+        #self.root.after(5000, self._attempt_camera_reconnect)
         
         self.root.after(200, self.startup_sequence) # start-up sequence starten
         self.root.protocol("WM_DELETE_WINDOW", self.on_close) # sluit window
@@ -231,7 +231,7 @@ class MSP_GUI:
                     self.mono.readConfig()
                     self.mono.readAddress('variables')
                     self.mono.sync()  # Negeer eventuele fouten
-                    #self.mono.reset()
+                    self.mono.reset()
                     sleep(8.5)
                     self.mono.set_wavelength(500)
 
@@ -622,4 +622,5 @@ class MSP_GUI:
             shutil.copy2(source_file, target_path)
             messagebox.showinfo("Succes", f"Dataset succesvol opgeslagen als:\n{target_path}")
         except Exception as e:
+
             messagebox.showerror("Fout", f"Kon dataset niet opslaan:\n{e}")
