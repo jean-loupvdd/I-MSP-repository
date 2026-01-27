@@ -243,24 +243,22 @@ class Monocromator:
     
    
 
-    def set_wavelength(self, wavelength, calib_file=None):
-        if calib_file is None:
-            calib_file = Path(__file__).resolve().parent / "wavelength_calib_Grating_300_500.txt"
-
-        with open(calib_file, "r") as f:
-            data = f.read()
+    def set_wavelength(self, wavelength, calib_file="wavelength_calib_Grating_300_500.txt"):
         """
         Zet de golflengte door de motor naar de juiste positie te bewegen.
-        
+
+
         Parameters:
-            wavelength (float): gewenste golflengte in nm
-            motor_controller: object van de Monocromator klasse (met positionAbs functie)
-            calib_file (str): pad naar het calibratiebestand
+        wavelength (float): gewenste golflengte in nm
+        calib_file (str | Path | None): pad naar calibratiebestand.
+        None => standaardbestand naast deze .py
         """
-        # Lees calibratiebestand in: kolom 0 = golflengte, kolom 2 = motorpositie
+        # Standaard: calib-bestand in dezelfde folder als dit script
+
+        # Lees calibratiebestand in
         data = np.loadtxt(calib_file)
-        wavelengths = data[:,0]
-        positions = data[:,2]
+        wavelengths = data[:, 0]
+        positions = data[:, 2]
     
         # Interpolatie: Cubic spline
         spline = CubicSpline(wavelengths, positions, extrapolate=True)
@@ -311,3 +309,4 @@ def list_monocromators():
 
 
     return monocromators
+
