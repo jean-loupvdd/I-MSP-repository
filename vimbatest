@@ -1,0 +1,19 @@
+from vmbpy import VmbSystem, FrameStatus
+
+with VmbSystem.get_instance() as vmb:
+    cam = vmb.get_all_cameras()[0]
+    with cam:
+        try: cam.get_feature_by_name("TriggerMode").set("Off")
+        except: pass
+        try: cam.get_feature_by_name("AcquisitionMode").set("Continuous")
+        except: pass
+        try: cam.get_feature_by_name("AcquisitionStart").run()
+        except: pass
+
+        def h(c, f):
+            print("frame", f.get_status())
+            c.queue_frame(f)
+
+        cam.start_streaming(h, buffer_count=5)
+        input("druk enter om te stoppen...")
+        cam.stop_streaming()
